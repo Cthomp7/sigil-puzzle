@@ -69,20 +69,34 @@ function drag(event) {
       sigil: dataset.sigil,
     })
   );
-  if (event.target.parentNode.classList.contains("droppable"))
+
+  if (event.target.parentNode.classList.contains("droppable")) {
     parentNode = event.target.parentNode;
+
+    const trashIcon = document.getElementById("trashIcon");
+    trashIcon.style.display = "block";
+  }
+
+  const tds = document.querySelectorAll("td.droppable");
+  tds.forEach((td) => {
+    td.classList = `${td.classList} .disablePointerEvents`;
+  });
 }
 
 function drop(event) {
   if (backgroundChanged) changeBackgroundImage("original");
 
-  if (event.target.classList.contains("droppable")) {
+  const trashIcon = document.getElementById("trashIcon");
+  trashIcon.style.display = "none";
+
+  if (event.target.classList.contains("trash")) {
+    if (parentNode) parentNode.innerHTML = "";
+  } else if (event.target.classList.contains("droppable")) {
     event.preventDefault();
 
     if (parentNode) parentNode.innerHTML = "";
 
     const data = event.dataTransfer.getData("text/html");
-    console.log("data: ", data);
     const { src, sigil } = JSON.parse(data);
     const img = document.createElement("img");
 
@@ -109,6 +123,11 @@ function drop(event) {
 
     checkGrid();
   }
+
+  const tds = document.querySelectorAll("td.droppable");
+  tds.forEach((td) => {
+    td.classList = "droppable";
+  });
 }
 
 function dragEnter(event) {

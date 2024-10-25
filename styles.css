@@ -16,7 +16,7 @@ body {
 .grid-table-container {
   position: relative;
   margin: 30px auto;
-  max-width: 700px;
+  max-width: 600px;
   width: 100%;
 }
 
@@ -61,7 +61,7 @@ body {
   left: 50%;
   /* margin-top: 20px; */
   /* 62vw image was a tad bigger*/
-  max-width: 730px;
+  max-width: 630px;
   top: 0;
   transform: translateX(-50%) translateY(-3%);
   width: 100%;
@@ -124,4 +124,8 @@ body {
 .tool {
   cursor: pointer;
   position: relative;
+}
+
+.disablePointerEvents {
+  pointer-events: none;
 }
